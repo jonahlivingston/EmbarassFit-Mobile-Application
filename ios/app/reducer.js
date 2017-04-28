@@ -1,10 +1,15 @@
  import {SET_USER} from "./actioncreators"
  
  const User = (state=null, action) => {
+     console.log("hit",action.type,SET_USER)
+     console.log(action)
    switch (action.type) {
-   case SET_USER:
+   case "SET_USER":
+    console.log("aaaa")
      return action.user
-     default:return state
+     default:
+     console.log("boo")
+     return state
    }
  }
 

@@ -4,7 +4,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   StyleSheet,
@@ -15,10 +15,13 @@ import {
   Button
 } from 'react-native';
 import {login} from "./ios/app/actioncreators"
-import {connect} from "react-redux"
+import {connect,Provider} from "react-redux"
 import store from './ios/app/store'
-export default class AwesomeProject extends Component {
-
+import {StackNavigator} from 'react-navigation'
+import CheckinReduxContainer from "./ios/app/reduxcontainers/CheckinReduxContainer"
+import main from "./index.ios"
+// import {setUser} from "./ios/app/actioncreators"
+class Home extends Component {
   constructor() {
     super()
     this.state = {
@@ -28,6 +31,7 @@ export default class AwesomeProject extends Component {
   }
 
   render() {
+  const { navigate } = this.props.navigation;
    var output = {text:"asd"};
    const setEmail = function(){
      output.text = this.state.email
@@ -55,7 +59,10 @@ export default class AwesomeProject extends Component {
           />
           </View>
           <Text>{output.text}</Text>
-          <Button title="Signin" color="yellow" onPress={()=>{store.dispatch(login(this.state.email,this.state.password))}}/>
+          <Button title="Signin" color="yellow" onPress={()=>{
+            store.dispatch(login(this.state.email,this.state.password))
+            navigate('Checkin')
+            }}/>
       </View>
     );
   }
@@ -78,5 +85,19 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+const Bav = 
+StackNavigator({
+  Main: {screen: Home},
+  Checkin: {screen: CheckinReduxContainer},
+})
+
+const AwesomeProject = ()=>{
+  return(
+<Provider store={store}>
+  <Bav/>
+  </Provider>
+  )
+}
 
 AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
