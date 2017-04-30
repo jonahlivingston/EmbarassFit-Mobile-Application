@@ -1,33 +1,29 @@
 import axios from "axios"
-
+import store from "./store"
+const fs = "192.168.1.53"
+const fh = "192.168.1.35"
+const temp = "192.168.1.3"
 export const SET_USER = "SET_USER"
-
+import { Container,Text, Header, Left, Right, Body, Title } from 'native-base';
 
 export const setUser = (user)=>{
     var a = {
         type:"SET_USER",
         user: user
     }
-    console.log("!!!!",a)
     return a;
 }
 
 
 export const login = (email,password)=>(dispatch)=>{
-    axios.post("http://192.168.4.7:1337/api/auth/login/local",{username:email,password:password})
+    console.log("email",email,"password",password)
+    axios.post(`http://${temp}:1337/api/auth/login/local`,{username:email,password:password})
     .then((response)=>{
-        console.log("response",response)
-    return axios.get(`http://192.168.4.7:1337/api/users/${email}`)
+    return axios.get(`http://${temp}:1337/api/users/${email}`)
     })
     .then((user)=>{
-        console.log("finnally",user)
         dispatch(setUser(user.data))
-    })
+    }).catch(()=>console.log("somethingwentwrong"))
 }
 
-export const checkin = (id,location)=>(dispatch)=>{
-axios.put("http://192.168.4.7:1337/api/users/checkin",{id:id,location,location})
-.then((response)=>{
-    console.log(response.data)
-})
-}
+
