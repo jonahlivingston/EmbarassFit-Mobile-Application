@@ -21,8 +21,9 @@ export default class Checkin extends Component {
   const fs = "192.168.1.53"
   const fh = "192.168.1.35"
   const temp = "192.168.1.3"
+  const pres = "192.168.4.7"
     const checkin = (id, location) => {
-      axios.put(`http://${temp}:1337/api/users/checkin`, { id: id, location, location })
+      axios.put(`http://${pres}:1337/api/users/checkin`, { id: id, location, location })
         .then((response) => {
           console.log("I got a response that is",response)
           this.setState({warning:response.data})
