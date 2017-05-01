@@ -51,26 +51,24 @@ class Home extends Component {
         }}
       >*/}
         {/*<Item>*/}
-
         {/*</Item>*/}
         <Text style={{
           fontWeight: "800",
           fontSize: 50,
           color: "white",
           paddingBottom: 50
-
-        }}>BlushFit</Text>
+        }}>EmbarassFit</Text>
         <Item >
-          <Input placeholder='Email'
+          <Input autoCapitalize="none" placeholder='Email'
             onChangeText={(email) => this.setState({ email })}
           />
         </Item>
         <Item>
-          <Input placeholder='password'
+          <Input secureTextEntry={true} placeholder='password'
             onChangeText={(password) => this.setState({ password })}
           />
         </Item>
-        <Button bordered primary
+        <Button bordered warning
           style={{
             marginTop: 20,
             marginLeft: "auto",
